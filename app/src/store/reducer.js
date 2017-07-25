@@ -11,6 +11,7 @@
 const initialState = {
   sharing: false,
   over: false,
+  calculation: false,
   things: {
     nextId: 1,
     allIds: [],
@@ -39,6 +40,8 @@ const SHARE_START = 'share-start';
 const SHARE_AMOUNTS = 'share-amounts';
 const SHARE_CHANGE = 'share-change';
 const SHARE_VALID = 'share-valid';
+
+const CALCULATION1 = 'calculation1';
 
 
 /* Duck */
@@ -141,10 +144,10 @@ const reducer = (state = initialState, action = {}) => {
       {
         const ids = [...state.people.allIds];
         const allIds = ids.filter(id => id !== action.id);
-        const people = { ...state.people.byId };
+        const peopleById = { ...state.people.byId };
         const byId = {};
         allIds.forEach((id) => {
-          byId[id] = people[id];
+          byId[id] = peopleById[id];
         });
         return {
           ...state,
@@ -159,14 +162,44 @@ const reducer = (state = initialState, action = {}) => {
     case SHARE_START:
       {
         const index = state.people.index;
+
+        const peopleAllIds = [...state.people.allIds];
+        const peopleNewIds = peopleAllIds.filter(id => (
+          state.people.byId[id].input !== ''));
+        const peopleById = { ...state.people.byId };
+        const peopleNewById = {};
+        peopleNewIds.forEach((id) => {
+          peopleNewById[id] = peopleById[id];
+        });
+        const people = {
+          ...state.people,
+          allIds: peopleNewIds,
+          byId: peopleNewById,
+        };
+
+        const thingsAllIds = [...state.things.allIds];
+        const thingsNewIds = thingsAllIds.filter(id => (
+          state.things.byId[id].input !== ''));
+        const thingsById = { ...state.things.byId };
+        const thingsNewById = {};
+        thingsNewIds.forEach((id) => {
+          thingsNewById[id] = thingsById[id];
+        });
+        const things = {
+          ...state.things,
+          allIds: thingsNewIds,
+          byId: thingsNewById,
+        };
+
         return {
           ...state,
           sharing: true,
           people: {
-            ...state.people,
-            current: state.people.allIds[index],
+            ...people,
+            current: people.allIds[index],
             index: index + 1,
           },
+          things,
         };
       }
 
@@ -246,6 +279,38 @@ const reducer = (state = initialState, action = {}) => {
         };
       }
 
+    case CALCULATION1:
+      {
+        const users = { ...state.people };
+        const stuffs = { ...state.things };
+
+        users.allIds.forEach((userId) => {
+          const sum = Object.keys(stuffs.allIds).reduce((acc, stuffId) => (
+            acc + users.byId[userId].things[stuffId]
+          ), 0);
+          users.byId[userId].average = sum / users.allIds.length;
+        });
+
+        stuffs.allIds.forEach((stuffId) => {
+          const prices = [];
+          const usersByAmount = {};
+          users.allIds.forEach((userId) => {
+            prices.push(users.byId[userId].things[stuffId]);
+            usersByAmount[users.byId[userId].things[stuffId]] = userId;
+          });
+          const max = Math.max(...prices);
+          stuffs.byId[stuffId].max = max;
+          stuffs.byId[stuffId].maxPeopleId = usersByAmount[max];
+        });
+
+        return {
+          ...state,
+          people: users,
+          things: stuffs,
+          calculation: true,
+        };
+      }
+
     default:
       return state;
   }
@@ -299,6 +364,10 @@ export const changeAmount = (thingId, amount) => ({
 
 export const validAmounts = () => ({
   type: SHARE_VALID,
+});
+
+export const calculation1 = () => ({
+  type: CALCULATION1,
 });
 
 

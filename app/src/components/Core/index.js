@@ -9,7 +9,7 @@ import People from 'src/containers/Core/People';
 
 
 /* Code */
-const Core = ({ things, people, sharing, over, actions }) => (
+const Core = ({ things, people, sharing, over, calculation, actions }) => (
   <section id="core">
     <div id="core-lists">
       {/* THINGS */}
@@ -70,12 +70,7 @@ const Core = ({ things, people, sharing, over, actions }) => (
                 </div>
               }
               {people.byId[people.current].done === 'go' &&
-                <form
-                  onSubmit={(evt) => {
-                    evt.preventDefault();
-                    actions.validAmounts();
-                  }}
-                >
+                <div>
                   <p>
                     Pour chaque truc,
                     indiques le montant <strong>maximum</strong>
@@ -105,10 +100,12 @@ const Core = ({ things, people, sharing, over, actions }) => (
                       ))}
                     </tbody>
                   </table>
-                  <button type="submit" className="button">
-                    C'est mon dernier mot Jean-Pierre !
+                  <button
+                    className="button"
+                    onClick={actions.validAmounts}
+                  >C'est mon dernier mot Jean-Pierre !
                   </button>
-                </form>
+                </div>
               }
             </div>
           :
@@ -125,7 +122,23 @@ const Core = ({ things, people, sharing, over, actions }) => (
     {over &&
       <div>
         <p>Yeah, tout le monde s'est exprimé !</p>
-        <button className="button">Voir le partage !</button>
+        {!calculation &&
+          <button
+            className="button"
+            onClick={actions.calculation}
+          >Voir le partage !</button>
+        }
+        {calculation &&
+          <ul>
+            {things.allIds.map(thingId => (
+              <li key={thingId}>
+                <span>{things.byId[thingId].input} : </span>
+                <span>{people.byId[things.byId[thingId].maxPeopleId].input}</span>
+                <span> ({things.byId[thingId].max})</span>
+              </li>
+            ))}
+          </ul>
+        }
       </div>
     }
 
@@ -141,6 +154,7 @@ Core.propTypes = {
   }).isRequired,
   sharing: PropTypes.bool.isRequired,
   over: PropTypes.bool.isRequired,
+  calculation: PropTypes.bool.isRequired,
   actions: PropTypes.objectOf(PropTypes.func.isRequired).isRequired,
 };
 
