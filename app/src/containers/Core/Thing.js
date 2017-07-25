@@ -11,6 +11,7 @@ import { updateThingInput, deleteThing, addThing } from 'src/store/reducer';
 // state
 const mapStateToProps = (state, { id }) => ({
   thing: state.things.byId[id],
+  sharing: state.sharing,
 });
 
 // dispatch

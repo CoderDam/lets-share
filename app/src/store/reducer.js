@@ -10,12 +10,15 @@
 /* initialState */
 const initialState = {
   sharing: false,
+  over: false,
   things: {
     nextId: 1,
     allIds: [],
     byId: {},
   },
   people: {
+    index: 0,
+    current: 0,
     nextId: 1,
     allIds: [],
     byId: {},
@@ -32,7 +35,10 @@ const PEOPLE_ADD = 'people-add';
 const PEOPLE_DELETE = 'people-delete';
 const PEOPLE_UPDATE = 'people-update';
 
-const SHARE = 'share';
+const SHARE_START = 'share-start';
+const SHARE_AMOUNTS = 'share-amounts';
+const SHARE_CHANGE = 'share-change';
+const SHARE_VALID = 'share-valid';
 
 
 /* Duck */
@@ -112,9 +118,6 @@ const reducer = (state = initialState, action = {}) => {
     case PEOPLE_ADD:
       {
         const currId = state.people.nextId;
-        // const thingIds = [...state.things.allIds];
-        // const things = {};
-        // thingIds.forEach(thingId => things[thingId]);
         return {
           ...state,
           people: {
@@ -126,6 +129,8 @@ const reducer = (state = initialState, action = {}) => {
               [currId]: {
                 id: [currId],
                 input: '',
+                done: 'waiting',
+                things: {},
               },
             },
           },
@@ -151,11 +156,95 @@ const reducer = (state = initialState, action = {}) => {
         };
       }
 
-    case SHARE:
+    case SHARE_START:
+      {
+        const index = state.people.index;
+        return {
+          ...state,
+          sharing: true,
+          people: {
+            ...state.people,
+            current: state.people.allIds[index],
+            index: index + 1,
+          },
+        };
+      }
+
+    case SHARE_AMOUNTS:
+      {
+        const nThings = {};
+        state.things.allIds.forEach((thingId) => {
+          nThings[thingId] = 0;
+        });
+        return {
+          ...state,
+          people: {
+            ...state.people,
+            byId: {
+              ...state.people.byId,
+              [state.people.current]: {
+                ...state.people.byId[state.people.current],
+                done: 'go',
+                things: nThings,
+              },
+            },
+          },
+        };
+      }
+
+    case SHARE_CHANGE:
       return {
         ...state,
-        sharing: true,
+        people: {
+          ...state.people,
+          byId: {
+            ...state.people.byId,
+            [state.people.current]: {
+              ...state.people.byId[state.people.current],
+              things: {
+                ...state.people.byId[state.people.current].things,
+                [action.thingId]: action.amount,
+              },
+            },
+          },
+        },
       };
+
+    case SHARE_VALID:
+      {
+        const index = state.people.index;
+        if (index < state.people.allIds.length) {
+          return {
+            ...state,
+            people: {
+              ...state.people,
+              current: state.people.allIds[index],
+              index: index + 1,
+              byId: {
+                ...state.people.byId,
+                [state.people.current]: {
+                  ...state.people.byId[state.people.current],
+                  done: 'ok',
+                },
+              },
+            },
+          };
+        }
+        return {
+          ...state,
+          over: true,
+          people: {
+            ...state.people,
+            byId: {
+              ...state.people.byId,
+              [state.people.current]: {
+                ...state.people.byId[state.people.current],
+                done: 'ok',
+              },
+            },
+          },
+        };
+      }
 
     default:
       return state;
@@ -194,8 +283,22 @@ export const updatePeopleInput = (id, value) => ({
   value,
 });
 
-export const share = () => ({
-  type: SHARE,
+export const startSharing = () => ({
+  type: SHARE_START,
+});
+
+export const startAmounts = () => ({
+  type: SHARE_AMOUNTS,
+});
+
+export const changeAmount = (thingId, amount) => ({
+  type: SHARE_CHANGE,
+  thingId,
+  amount,
+});
+
+export const validAmounts = () => ({
+  type: SHARE_VALID,
 });
 
 

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 /* Local import */
 import Core from 'src/components/Core';
-import { addThing, addPeople, share } from 'src/store/reducer';
+import { addThing, addPeople, startSharing,
+  startAmounts, changeAmount, validAmounts } from 'src/store/reducer';
 
 
 /* Map */
@@ -13,6 +14,7 @@ const mapStateToProps = state => ({
   things: state.things,
   people: state.people,
   sharing: state.sharing,
+  over: state.over,
 });
 
 // dispatch
@@ -20,7 +22,10 @@ const mapDispatchToProps = dispatch => ({
   actions: {
     addThing: () => dispatch(addThing()),
     addPeople: () => dispatch(addPeople()),
-    share: () => dispatch(share()),
+    share: () => dispatch(startSharing()),
+    start: () => dispatch(startAmounts()),
+    changeAmount: (thingId, amount) => dispatch(changeAmount(thingId, amount)),
+    validAmounts: () => dispatch(validAmounts()),
   },
 });
 

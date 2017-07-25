@@ -11,6 +11,7 @@ import { updatePeopleInput, deletePeople, addPeople } from 'src/store/reducer';
 // state
 const mapStateToProps = (state, { id }) => ({
   people: state.people.byId[id],
+  sharing: state.sharing,
 });
 
 // dispatch

@@ -9,7 +9,7 @@ import Core from 'src/containers/Core';
 /* Code */
 const App = () => (
   <main id="app">
-    <h1 id="app-title">Les bons contes font les bonzes amis !</h1>
+    <h1 id="app-title">Les bons comptes font les bons amis !</h1>
     <div id="app-how">
       <h2 id="app-how-title">Comment ça marche ?</h2>
       <p id="app-how-text">
