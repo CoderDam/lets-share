@@ -27,7 +27,7 @@ const People = ({ people, sharing, actions }) => (
             value={people.input}
             onChange={evt => actions.updateInput(evt.target.value)}
             onKeyUp={evt => (
-              evt.key === 'Enter' && actions.addPeople()
+              evt.key === 'Enter' && actions.addPeople(evt.target.value)
             )}
           />
           <button

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 /* Local import */
 import People from 'src/components/Core/People';
-import { updatePeopleInput, deletePeople, addPeople } from 'src/store/reducer';
+import { updatePeopleInput, deletePeople, addPeople, startSharing } from 'src/store/reducer';
 
 
 /* Map */
@@ -19,7 +19,10 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   actions: {
     updateInput: string => dispatch(updatePeopleInput(id, string)),
     delete: () => dispatch(deletePeople(id)),
-    addPeople: () => dispatch(addPeople()),
+    addPeople: (string) => {
+      if (string) dispatch(addPeople());
+      else dispatch(startSharing());
+    },
   },
 });
 

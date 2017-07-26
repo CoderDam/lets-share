@@ -16,13 +16,13 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
       <div id="core-lists-things">
         {sharing
           ?
-            <p>Trucs</p>
+            <h3>Trucs</h3>
           :
             <button
               id="core-lists-things-add"
               className="button"
               onClick={actions.addThing}
-            >+ truc</button>
+            >+ Truc</button>
         }
         <ul id="core-lists-things-list">
           {things.allIds.map(thingId => (
@@ -35,13 +35,13 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
       <div id="core-lists-people">
         {sharing
           ?
-            <p>Buddies</p>
+            <h3>Buddies</h3>
           :
             <button
               id="core-lists-people-add"
               className="button"
               onClick={actions.addPeople}
-            >+ buddy</button>
+            >+ Buddy</button>
         }
         <ul id="core-lists-people-list">
           {people.allIds.map(peopleId => (
@@ -72,6 +72,8 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
                   <p>Quand t'es prêt (et seul), cliques sur le beau bouton !</p>
                   <button
                     className="button"
+                    // eslint-disable-next-line jsx-a11y/no-autofocus
+                    autoFocus
                     onClick={actions.start}
                   >Go !</button>
                 </div>
@@ -98,6 +100,8 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
                             <input
                               type="number"
                               value={people.byId[people.current].things[thingId]}
+                              // eslint-disable-next-line jsx-a11y/no-autofocus
+                              autoFocus={thingId === Math.min(...things.allIds)}
                               onChange={evt => (
                                 actions.changeAmount(thingId, evt.target.value)
                               )}
@@ -135,6 +139,8 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
             <button
               className="button"
               onClick={actions.calculation}
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
             >Voir le partage !</button>
           :
             <div>

@@ -24,7 +24,7 @@ const Thing = ({ thing, sharing, actions }) => (
             value={thing.input}
             onChange={evt => (!sharing && actions.updateInput(evt.target.value))}
             onKeyUp={evt => (
-              !sharing && evt.key === 'Enter' && actions.addThing()
+              !sharing && evt.key === 'Enter' && actions.addThing(evt.target.value)
             )}
           />
           <button
