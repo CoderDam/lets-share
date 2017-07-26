@@ -2,8 +2,8 @@ exports.config =
   files:
     stylesheets:
       joinTo: 'css/app.css'
-      order:
-        before: 'app/styles/reset.styl'
+      # order:
+      #   before: 'app/styles/reset.styl'
 
     javascripts:
       joinTo: 'js/app.js'

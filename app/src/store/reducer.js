@@ -23,6 +23,7 @@ const initialState = {
     nextId: 1,
     allIds: [],
     byId: {},
+    pool: 0,
   },
 };
 
@@ -42,6 +43,7 @@ const SHARE_CHANGE = 'share-change';
 const SHARE_VALID = 'share-valid';
 
 const CALCULATION1 = 'calculation1';
+const CALCULATION2 = 'calculation2';
 
 
 /* Duck */
@@ -134,6 +136,7 @@ const reducer = (state = initialState, action = {}) => {
                 input: '',
                 done: 'waiting',
                 things: {},
+                get: [],
               },
             },
           },
@@ -285,8 +288,8 @@ const reducer = (state = initialState, action = {}) => {
         const stuffs = { ...state.things };
 
         users.allIds.forEach((userId) => {
-          const sum = Object.keys(stuffs.allIds).reduce((acc, stuffId) => (
-            acc + users.byId[userId].things[stuffId]
+          const sum = stuffs.allIds.reduce((acc, stuffId) => (
+            acc + Number(users.byId[userId].things[stuffId])
           ), 0);
           users.byId[userId].average = sum / users.allIds.length;
         });
@@ -296,17 +299,47 @@ const reducer = (state = initialState, action = {}) => {
           const usersByAmount = {};
           users.allIds.forEach((userId) => {
             prices.push(users.byId[userId].things[stuffId]);
-            usersByAmount[users.byId[userId].things[stuffId]] = userId;
+            if (!usersByAmount[users.byId[userId].things[stuffId]]) {
+              usersByAmount[users.byId[userId].things[stuffId]] = userId;
+            }
           });
           const max = Math.max(...prices);
+          const winnerId = usersByAmount[max];
           stuffs.byId[stuffId].max = max;
-          stuffs.byId[stuffId].maxPeopleId = usersByAmount[max];
+          stuffs.byId[stuffId].winnerId = winnerId;
+          users.byId[winnerId].get.push(stuffId);
         });
 
         return {
           ...state,
           people: users,
           things: stuffs,
+        };
+      }
+
+    case CALCULATION2:
+      {
+        const users = { ...state.people };
+
+        users.allIds.forEach((userId) => {
+          const gotSum = users.byId[userId].get.reduce((acc, stuffId) => (
+            acc + Number(users.byId[userId].things[stuffId])
+          ), 0);
+          const toPay = gotSum - users.byId[userId].average;
+          users.byId[userId].toPay = Math.round(toPay * 100) / 100;
+          users.pool += toPay;
+        });
+
+        users.allIds.forEach((userId) => {
+          const toGet = users.pool / users.allIds.length;
+          const total = toGet - users.byId[userId].toPay;
+          users.byId[userId].toGet = Math.round(toGet * 100) / 100;
+          users.byId[userId].total = Math.round(total * 100) / 100;
+        });
+
+        return {
+          ...state,
+          people: users,
           calculation: true,
         };
       }
@@ -368,6 +401,10 @@ export const validAmounts = () => ({
 
 export const calculation1 = () => ({
   type: CALCULATION1,
+});
+
+export const calculation2 = () => ({
+  type: CALCULATION2,
 });
 
 

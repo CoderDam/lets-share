@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 
 /* Local import */
-// import Core from 'src/containers/Core';
 
 
 /* Code */
@@ -13,12 +12,12 @@ const People = ({ people, sharing, actions }) => (
     {sharing
       ?
         <p>
-          <span>{people.id}. </span>
-          <span>{people.input}</span>
+          <span
+            className={'people-name' && people.done === 'ok' && 'people-name--done'}
+          >{people.input}</span>
         </p>
       :
         <div>
-          <span>{people.id}. </span>
           <input
             id={`people-${people.id}-input`}
             className="people-input"

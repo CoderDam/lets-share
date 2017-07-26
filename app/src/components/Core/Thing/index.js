@@ -13,12 +13,10 @@ const Thing = ({ thing, sharing, actions }) => (
     {sharing
       ?
         <div>
-          <span>{thing.id}. </span>
           <span>{thing.input}</span>
         </div>
       :
         <div>
-          <span>{thing.id}. </span>
           <input
             id={`thing-${thing.id}-input`}
             className="thing-input"

@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 /* Local import */
 import Core from 'src/components/Core';
 import { addThing, addPeople, startSharing,
-  startAmounts, changeAmount, validAmounts, calculation1 } from 'src/store/reducer';
+  startAmounts, changeAmount, validAmounts,
+  calculation1, calculation2 } from 'src/store/reducer';
 
 
 /* Map */
@@ -29,6 +30,7 @@ const mapDispatchToProps = dispatch => ({
     validAmounts: () => dispatch(validAmounts()),
     calculation: () => {
       dispatch(calculation1());
+      dispatch(calculation2());
     },
   },
 });

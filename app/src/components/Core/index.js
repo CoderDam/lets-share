@@ -122,22 +122,52 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
     {over &&
       <div>
         <p>Yeah, tout le monde s'est exprimé !</p>
-        {!calculation &&
-          <button
-            className="button"
-            onClick={actions.calculation}
-          >Voir le partage !</button>
-        }
-        {calculation &&
-          <ul>
-            {things.allIds.map(thingId => (
-              <li key={thingId}>
-                <span>{things.byId[thingId].input} : </span>
-                <span>{people.byId[things.byId[thingId].maxPeopleId].input}</span>
-                <span> ({things.byId[thingId].max})</span>
-              </li>
-            ))}
-          </ul>
+        <h2>Résultats</h2>
+        {!calculation
+          ?
+            <button
+              className="button"
+              onClick={actions.calculation}
+            >Voir le partage !</button>
+          :
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Buddy</th>
+                    <th>Récupère</th>
+                    <th>Paye</th>
+                    <th>Reçoit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {people.allIds.map(peopleId => (
+                    <tr key={peopleId}>
+                      <td>{people.byId[peopleId].input}</td>
+                      <td>
+                        {people.byId[peopleId].get.map(thingId => (
+                          <span key={thingId}>
+                            {things.byId[thingId].input}
+                          </span>
+                        ))}
+                      </td>
+                      <td>
+                        {people.byId[peopleId].total < 0
+                          ? -people.byId[peopleId].total
+                          : '-'
+                        }
+                      </td>
+                      <td>
+                        {people.byId[peopleId].total >= 0
+                          ? people.byId[peopleId].total
+                          : '-'
+                        }
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
         }
       </div>
     }
