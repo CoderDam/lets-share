@@ -51,6 +51,13 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
       </div>
     </div>
 
+    {sharing &&
+      <button
+        className="button"
+        onClick={actions.reboot}
+      >Tout reboot !</button>
+    }
+
     {/* LET'S GO */}
     {!over &&
       <div id="core-share">

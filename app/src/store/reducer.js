@@ -37,6 +37,8 @@ const PEOPLE_ADD = 'people-add';
 const PEOPLE_DELETE = 'people-delete';
 const PEOPLE_UPDATE = 'people-update';
 
+const REBOOT = 'reboot';
+
 const SHARE_START = 'share-start';
 const SHARE_AMOUNTS = 'share-amounts';
 const SHARE_CHANGE = 'share-change';
@@ -161,6 +163,9 @@ const reducer = (state = initialState, action = {}) => {
           },
         };
       }
+
+    case REBOOT:
+      return initialState;
 
     case SHARE_START:
       {
@@ -379,6 +384,10 @@ export const updatePeopleInput = (id, value) => ({
   type: PEOPLE_UPDATE,
   id,
   value,
+});
+
+export const reboot = () => ({
+  type: REBOOT,
 });
 
 export const startSharing = () => ({

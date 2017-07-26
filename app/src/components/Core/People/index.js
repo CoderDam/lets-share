@@ -11,11 +11,11 @@ const People = ({ people, sharing, actions }) => (
   <li id={`people-${people.id}`} className="people">
     {sharing
       ?
-        <p>
-          <span
-            className={'people-name' && people.done === 'ok' && 'people-name--done'}
-          >{people.input}</span>
-        </p>
+        <span
+          className={'people-name' && people.done === 'ok' && 'people-name--done'}
+        >
+          {people.input}
+        </span>
       :
         <div>
           <input

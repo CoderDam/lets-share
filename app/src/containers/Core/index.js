@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 /* Local import */
 import Core from 'src/components/Core';
-import { addThing, addPeople, startSharing,
-  startAmounts, changeAmount, validAmounts,
-  calculation1, calculation2 } from 'src/store/reducer';
+import { addThing, addPeople, reboot,
+  startSharing, startAmounts, changeAmount,
+  validAmounts, calculation1, calculation2 } from 'src/store/reducer';
 
 
 /* Map */
@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
   actions: {
     addThing: () => dispatch(addThing()),
     addPeople: () => dispatch(addPeople()),
+    reboot: () => dispatch(reboot()),
     share: () => dispatch(startSharing()),
     start: () => dispatch(startAmounts()),
     changeAmount: (thingId, amount) => dispatch(changeAmount(thingId, amount)),
