@@ -3,7 +3,32 @@
  *****************************/
 // Blocks
 body
+  color: darkslategrey
   background-color: rgb(218, 241, 218)
+  font-family: Ubuntu, sans-serif
+
+hr
+  border: 1px solid transparent
+  border-top-color: green
+  margin: 1em 0
+
+a
+  color: black
+  position: relative
+  text-decoration: none
+
+  &:hover
+  &:focus
+    outline: 0
+
+    &::after
+      animation: underline .5s both
+      border-top: 1px solid black
+      bottom: -.1em
+      content: ""
+      display: block
+      left: 50%
+      position: absolute
 
 // IDs
 
@@ -12,15 +37,92 @@ body
   border-radius: 5px
   background-color: lightgreen
   border: 2px solid lightgreen
+  color: inherit
+  font-size: 1em
+  font-variant: small-caps
+  font-weight: bold
+  letter-spacing: .06em
+  outline: 0
   padding: .5em 1em
   position: relative
 
   &:hover
+  &:focus
     border-bottom-color: green
     cursor: pointer
+
+  &:active
+    transform: scale(.9)
+
+.input
+  background-color: transparent
+  border: 2px solid transparent
+  border-bottom-color: green
+  color: inherit
+  font-family: inherit
+  font-size: inherit
+  margin: .3em 0
+  padding: 0 .2em
+  outline: 0
+
+  &:focus
+    background-color: white
+
+.delete
+  background-color: transparent
+  border-radius: 100%
+  border: 0
+  color: darkorchid
+  cursor: pointer
+  height: 2em
+  line-height: 1em
+  margin-left: .5em
+  outline: 0
+  position: relative
+  width: 2em
+
+  &::after
+    border: 2px solid transparent
+    border-bottom-color: darkorchid
+    border-radius: 100%
+    border-right-color: darkorchid
+    content: ""
+    display: block
+    height: calc(2em - 2px)
+    left: -1px
+    position: absolute
+    top: -1px
+    transition: transform .2s
+    width: calc(2em - 2px)
+
+  &:hover
+  &:focus
+    background-color: darkslategrey
+    transition: background 3s
+
+    &::after
+      animation: turn linear 1s infinite
+
+
 
 /*****************************
  *          DESKTOP          *
  *****************************/
 @media (orientation: landscape)
   // Blocks
+
+
+/*****************************
+ *        ANIMATIONS         *
+ *****************************/
+@keyframes turn
+  100%
+    transform-origin: center center
+    transform: rotate(1turn)
+
+@keyframes underline
+  0%
+    width: 0
+  100%
+    left: 0
+    width: 100%

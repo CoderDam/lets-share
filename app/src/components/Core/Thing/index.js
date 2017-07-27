@@ -17,7 +17,7 @@ const Thing = ({ thing, sharing, actions }) => (
         <div>
           <input
             id={`thing-${thing.id}-input`}
-            className="thing-input"
+            className="input thing-input"
             type="text"
             // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus
@@ -28,9 +28,9 @@ const Thing = ({ thing, sharing, actions }) => (
             )}
           />
           <button
-            className="thing-delete"
+            className="delete thing-delete"
             onClick={actions.delete}
-          >x</button>
+          >✖</button>
         </div>
     }
   </li>

@@ -20,7 +20,7 @@ const People = ({ people, sharing, actions }) => (
         <div>
           <input
             id={`people-${people.id}-input`}
-            className="people-input"
+            className="input people-input"
             type="text"
             // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus
@@ -31,9 +31,9 @@ const People = ({ people, sharing, actions }) => (
             )}
           />
           <button
-            className="people-delete"
+            className="delete people-delete"
             onClick={actions.delete}
-          >x</button>
+          >✖</button>
         </div>
     }
   </li>

@@ -8,7 +8,16 @@
 .people
   &-name
     &--done
-      text-decoration: line-through
+      position: relative
+
+      &::before
+        content: ""
+        display: block
+        position: absolute
+        top: .5em
+        left: -.1em
+        border: 1px solid black
+        animation: ray 1s both
 
 
 /*****************************
@@ -19,3 +28,15 @@
 
 
   // Classes
+
+
+
+/*****************************
+ *        ANIMATIONS         *
+ *****************************/
+@keyframes ray
+  0%
+    width: 0
+
+  100%
+    width: 110%

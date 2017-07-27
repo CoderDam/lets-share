@@ -2,18 +2,35 @@
  *           MOBILE          *
  *****************************/
 // IDs
-#core-lists
-  display: flex
-  justify-content: space-around
+#core
+  position: relative
 
-  &-things
-  &-people
-    text-align: center
-    width: 50%
+  &-reboot
+    background-color: thistle
+    border-color: thistle
+    bottom: 0
+    position: absolute
+    right: 0
 
-  &-things-list
-  &-people-list
-    list-style: none
+    &:hover
+    &:focus
+      border-bottom-color: darkorchid
+
+  &-lists
+    display: flex
+    justify-content: space-around
+
+    &-things
+    &-people
+      text-align: center
+      width: 50%
+
+    &-things-list
+    &-people-list
+      list-style: none
+
+  &-share
+    margin-top: 2em
 
 // Classes
 

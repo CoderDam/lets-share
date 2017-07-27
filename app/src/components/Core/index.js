@@ -11,6 +11,14 @@ import People from 'src/containers/Core/People';
 /* Code */
 const Core = ({ things, people, sharing, over, calculation, actions }) => (
   <section id="core">
+    <button
+      id="core-reboot"
+      className="button"
+      tabIndex={-1}
+      onClick={actions.reboot}
+    >Tout reboot !</button>
+
+    <h2 id="core-title">Par ici la saisie !</h2>
     <div id="core-lists">
       {/* THINGS */}
       <div id="core-lists-things">
@@ -50,13 +58,6 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
         </ul>
       </div>
     </div>
-
-    {sharing &&
-      <button
-        className="button"
-        onClick={actions.reboot}
-      >Tout reboot !</button>
-    }
 
     {/* LET'S GO */}
     {!over &&
@@ -99,6 +100,7 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
                           <td>
                             <input
                               type="number"
+                              className="input value-input"
                               value={people.byId[people.current].things[thingId]}
                               // eslint-disable-next-line jsx-a11y/no-autofocus
                               autoFocus={thingId === Math.min(...things.allIds)}
