@@ -1,0 +1,42 @@
+/*****************************
+ *           MOBILE          *
+ *****************************/
+// IDs
+#app
+  &-how
+    &-title
+      margin-bottom: 0
+
+      &-arrow
+        background: none
+        border: 0
+        color: inherit
+        cursor: pointer
+        display: block
+        float: right
+
+        &::after
+          content: "◢"
+          display: block
+          transform: rotate(45deg);
+
+// Classes
+#app
+  & .how
+    &-text
+      height: 0
+      overflow: hidden
+      transition: .5s
+
+      &--visible
+        height: 10em
+
+
+/*****************************
+ *          DESKTOP          *
+ *****************************/
+@media (orientation: landscape)
+  // IDs
+
+
+  // Classes

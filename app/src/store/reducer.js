@@ -9,6 +9,7 @@
 
 /* initialState */
 const initialState = {
+  displayHow: false,
   sharing: false,
   over: false,
   calculation: false,
@@ -29,6 +30,8 @@ const initialState = {
 
 
 /* Types */
+const HOW_DISPLAY = 'how-display';
+
 const THING_ADD = 'thing-add';
 const THING_DELETE = 'thing-delete';
 const THING_UPDATE = 'thing-update';
@@ -51,6 +54,13 @@ const CALCULATION2 = 'calculation2';
 /* Duck */
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    /* DISPLAY */
+    case HOW_DISPLAY:
+      return {
+        ...state,
+        displayHow: !state.displayHow,
+      };
+
     /* THINGS */
     case THING_UPDATE:
       return {
@@ -79,7 +89,7 @@ const reducer = (state = initialState, action = {}) => {
             byId: {
               ...state.things.byId,
               [currId]: {
-                id: [currId],
+                id: currId,
                 input: '',
               },
             },
@@ -134,7 +144,7 @@ const reducer = (state = initialState, action = {}) => {
             byId: {
               ...state.people.byId,
               [currId]: {
-                id: [currId],
+                id: currId,
                 input: '',
                 done: 'waiting',
                 things: {},
@@ -167,6 +177,7 @@ const reducer = (state = initialState, action = {}) => {
     case REBOOT:
       return initialState;
 
+    /* SHARE */
     case SHARE_START:
       {
         const index = state.people.index;
@@ -287,6 +298,7 @@ const reducer = (state = initialState, action = {}) => {
         };
       }
 
+    /* CALCULATE */
     case CALCULATION1:
       {
         const users = { ...state.people };
@@ -305,7 +317,7 @@ const reducer = (state = initialState, action = {}) => {
           users.allIds.forEach((userId) => {
             prices.push(users.byId[userId].things[stuffId]);
             if (!usersByAmount[users.byId[userId].things[stuffId]]) {
-              usersByAmount[users.byId[userId].things[stuffId]] = userId;
+              usersByAmount[Number(users.byId[userId].things[stuffId])] = userId;
             }
           });
           const max = Math.max(...prices);
@@ -356,6 +368,10 @@ const reducer = (state = initialState, action = {}) => {
 
 
 /* Action creators */
+export const showHow = () => ({
+  type: HOW_DISPLAY,
+});
+
 export const addThing = () => ({
   type: THING_ADD,
 });

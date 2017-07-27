@@ -1,6 +1,7 @@
 /* Npm import */
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 
 /* Local import */
@@ -12,7 +13,8 @@ const People = ({ people, sharing, actions }) => (
     {sharing
       ?
         <span
-          className={'people-name' && people.done === 'ok' && 'people-name--done'}
+          className={classNames('people-name',
+          { 'people-name--done': people.done === 'ok' })}
         >
           {people.input}
         </span>

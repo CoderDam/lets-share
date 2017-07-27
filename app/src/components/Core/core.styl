@@ -3,37 +3,50 @@
  *****************************/
 // IDs
 #core
-  position: relative
-
-  &-reboot
-    background-color: thistle
-    border-color: thistle
-    bottom: 0
-    position: absolute
-    right: 0
-
-    &:hover
-    &:focus
-      border-bottom-color: darkorchid
-
   &-lists
     display: flex
+    flex-wrap: wrap
     justify-content: space-around
 
     &-things
     &-people
+      overflow: hidden
       text-align: center
       width: 50%
 
-    &-things-list
-    &-people-list
-      list-style: none
+      &-list
+        list-style: none
+        padding-left: 0
 
   &-share
     margin-top: 2em
 
-// Classes
+    &-block
+      &-title
+        & strong
+          color: green
+          text-transform: uppercase
 
+// Classes
+#core
+  &-results
+    & .buddy
+      font-size: 1.3em
+      font-variant: small-caps
+      font-weight: bold
+
+      &:first-letter
+        text-transform: uppercase
+
+    & .thing
+      &::after
+        content: ","
+        display: inline-block
+        margin-right: .31em
+
+      &:last-child
+        &::after
+          display: none
 
 /*****************************
  *          DESKTOP          *

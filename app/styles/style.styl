@@ -30,6 +30,9 @@ a
       left: 50%
       position: absolute
 
+h1, h2
+  margin-top: .4em
+
 // IDs
 
 // Classes
@@ -52,7 +55,7 @@ a
     cursor: pointer
 
   &:active
-    transform: scale(.9)
+    transform: scale(.95)
 
 .input
   background-color: transparent
@@ -62,8 +65,14 @@ a
   font-family: inherit
   font-size: inherit
   margin: .3em 0
+  max-width: 70%
   padding: 0 .2em
   outline: 0
+
+  &[type="number"]
+    padding-right: 0
+    text-align: right
+    letter-spacing: .2em
 
   &:focus
     background-color: white
@@ -74,42 +83,77 @@ a
   border: 0
   color: darkorchid
   cursor: pointer
-  height: 2em
-  line-height: 1em
-  margin-left: .5em
+  height: 1em
+  line-height: .5em
+  margin-left: .25em
   outline: 0
   position: relative
-  width: 2em
-
-  &::after
-    border: 2px solid transparent
-    border-bottom-color: darkorchid
-    border-radius: 100%
-    border-right-color: darkorchid
-    content: ""
-    display: block
-    height: calc(2em - 2px)
-    left: -1px
-    position: absolute
-    top: -1px
-    transition: transform .2s
-    width: calc(2em - 2px)
+  width: 1em
 
   &:hover
   &:focus
     background-color: darkslategrey
     transition: background 3s
 
-    &::after
-      animation: turn linear 1s infinite
+.table
+  margin: 1em auto
 
+  & thead
+    background: darkslategrey
+    color: white
+
+  & tbody
+    & tr
+      &:nth-child(odd)
+        background-color: gainsboro
+
+      &:nth-child(even)
+        background-color: silver
+
+  & th
+  & td
+    padding: .3em 1em
+
+  & input[type="number"]
+    width: 5em
+
+  & .amount
+    text-align: right
 
 
 /*****************************
  *          DESKTOP          *
  *****************************/
-@media (orientation: landscape)
+@media (min-width:768px)
   // Blocks
+  // IDs
+  // Classes
+  .delete
+    height: 2em
+    line-height: 1em
+    margin-left: .5em
+    outline: 0
+    position: relative
+    width: 2em
+
+    &::after
+      border: 2px solid transparent
+      border-bottom-color: darkorchid
+      border-radius: 100%
+      border-right-color: darkorchid
+      content: ""
+      display: block
+      height: calc(2em - 2px)
+      left: -1px
+      position: absolute
+      top: -1px
+      transition: transform .2s
+      width: calc(2em - 2px)
+
+    &:focus
+    &:hover
+      &::after
+        animation: turn linear 1s infinite
 
 
 /*****************************

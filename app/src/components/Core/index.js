@@ -11,16 +11,10 @@ import People from 'src/containers/Core/People';
 /* Code */
 const Core = ({ things, people, sharing, over, calculation, actions }) => (
   <section id="core">
-    <button
-      id="core-reboot"
-      className="button"
-      tabIndex={-1}
-      onClick={actions.reboot}
-    >Tout reboot !</button>
-
-    <h2 id="core-title">Par ici la saisie !</h2>
+    <h2 id="core-title">Quoi et qui ?</h2>
     <div id="core-lists">
       {/* THINGS */}
+      {/* need sharing, things, actions.addThing */}
       <div id="core-lists-things">
         {sharing
           ?
@@ -40,6 +34,7 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
       </div>
 
       {/* PEOPLE */}
+      {/* need sharing, people, actions.addPeople */}
       <div id="core-lists-people">
         {sharing
           ?
@@ -60,13 +55,15 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
     </div>
 
     {/* LET'S GO */}
+    {/* need sharing, people, things, actions.start, actions.changeAmount,
+    actions.validAmounts, actions.share (actions.go) */}
     {!over &&
       <div id="core-share">
         {sharing
           ?
             <div id="core-share-block">
               <h2 id="core-share-block-title">
-                C'est parti pour {people.byId[people.current].input}
+                C'est parti pour <strong>{people.byId[people.current].input}</strong>
               </h2>
               {people.byId[people.current].done === 'waiting' &&
                 <div>
@@ -83,10 +80,10 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
                 <div>
                   <p>
                     Pour chaque truc,
-                    indiques le montant <strong>maximum</strong>
+                    indiques le montant <strong>maximum</strong>&nbsp;
                     que t'es prêt à payer
                   </p>
-                  <table>
+                  <table className="table">
                     <thead>
                       <tr>
                         <th>Truc</th>
@@ -100,6 +97,7 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
                           <td>
                             <input
                               type="number"
+                              min={0}
                               className="input value-input"
                               value={people.byId[people.current].things[thingId]}
                               // eslint-disable-next-line jsx-a11y/no-autofocus
@@ -132,10 +130,10 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
     }
 
     {/* OVER */}
+    {/* need over, calculation, people, things, actions.calculation */}
     {over &&
-      <div>
-        <p>Yeah, tout le monde s'est exprimé !</p>
-        <h2>Résultats</h2>
+      <div id="core-results">
+        <h2 id="core-results-title">Résultats</h2>
         {!calculation
           ?
             <button
@@ -146,11 +144,11 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
             >Voir le partage !</button>
           :
             <div>
-              <table>
+              <table className="table">
                 <thead>
                   <tr>
                     <th>Buddy</th>
-                    <th>Récupère</th>
+                    <th>Obtient</th>
                     <th>Paye</th>
                     <th>Reçoit</th>
                   </tr>
@@ -158,21 +156,21 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
                 <tbody>
                   {people.allIds.map(peopleId => (
                     <tr key={peopleId}>
-                      <td>{people.byId[peopleId].input}</td>
+                      <td className="buddy">{people.byId[peopleId].input}</td>
                       <td>
                         {people.byId[peopleId].get.map(thingId => (
-                          <span key={thingId}>
+                          <span key={thingId} className="thing">
                             {things.byId[thingId].input}
                           </span>
                         ))}
                       </td>
-                      <td>
+                      <td className="amount">
                         {people.byId[peopleId].total < 0
                           ? -people.byId[peopleId].total
                           : '-'
                         }
                       </td>
-                      <td>
+                      <td className="amount">
                         {people.byId[peopleId].total >= 0
                           ? people.byId[peopleId].total
                           : '-'
