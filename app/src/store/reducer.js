@@ -40,7 +40,7 @@ const PEOPLE_ADD = 'people-add';
 const PEOPLE_DELETE = 'people-delete';
 const PEOPLE_UPDATE = 'people-update';
 
-const REBOOT = 'reboot';
+const REBOOT_FULL = 'reboot-full';
 
 const SHARE_START = 'share-start';
 const SHARE_AMOUNTS = 'share-amounts';
@@ -145,7 +145,7 @@ const reducer = (state = initialState, action = {}) => {
               ...state.people.byId,
               [currId]: {
                 id: currId,
-                input: '',
+                input: action.name ? action.name : '',
                 done: 'waiting',
                 things: {},
                 get: [],
@@ -174,7 +174,7 @@ const reducer = (state = initialState, action = {}) => {
         };
       }
 
-    case REBOOT:
+    case REBOOT_FULL:
       return initialState;
 
     /* SHARE */
@@ -387,8 +387,9 @@ export const updateThingInput = (id, value) => ({
   value,
 });
 
-export const addPeople = () => ({
+export const addPeople = name => ({
   type: PEOPLE_ADD,
+  name,
 });
 
 export const deletePeople = id => ({
@@ -402,8 +403,8 @@ export const updatePeopleInput = (id, value) => ({
   value,
 });
 
-export const reboot = () => ({
-  type: REBOOT,
+export const fullReboot = () => ({
+  type: REBOOT_FULL,
 });
 
 export const startSharing = () => ({

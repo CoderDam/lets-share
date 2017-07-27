@@ -11,28 +11,8 @@ import People from 'src/containers/Core/People';
 /* Code */
 const Core = ({ things, people, sharing, over, calculation, actions }) => (
   <section id="core">
-    <h2 id="core-title">Quoi et qui ?</h2>
+    <h2 id="core-title">Qui et quoi ?</h2>
     <div id="core-lists">
-      {/* THINGS */}
-      {/* need sharing, things, actions.addThing */}
-      <div id="core-lists-things">
-        {sharing
-          ?
-            <h3>Trucs</h3>
-          :
-            <button
-              id="core-lists-things-add"
-              className="button"
-              onClick={actions.addThing}
-            >+ Truc</button>
-        }
-        <ul id="core-lists-things-list">
-          {things.allIds.map(thingId => (
-            <Thing key={thingId} id={thingId} />
-          ))}
-        </ul>
-      </div>
-
       {/* PEOPLE */}
       {/* need sharing, people, actions.addPeople */}
       <div id="core-lists-people">
@@ -49,6 +29,26 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
         <ul id="core-lists-people-list">
           {people.allIds.map(peopleId => (
             <People key={peopleId} id={peopleId} />
+          ))}
+        </ul>
+      </div>
+
+      {/* THINGS */}
+      {/* need sharing, things, actions.addThing */}
+      <div id="core-lists-things">
+        {sharing
+          ?
+            <h3>Trucs</h3>
+          :
+            <button
+              id="core-lists-things-add"
+              className="button"
+              onClick={actions.addThing}
+            >+ Truc</button>
+        }
+        <ul id="core-lists-things-list">
+          {things.allIds.map(thingId => (
+            <Thing key={thingId} id={thingId} />
           ))}
         </ul>
       </div>
@@ -137,6 +137,7 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
         {!calculation
           ?
             <button
+              id="core-results-button"
               className="button"
               onClick={actions.calculation}
               // eslint-disable-next-line jsx-a11y/no-autofocus
@@ -171,7 +172,7 @@ const Core = ({ things, people, sharing, over, calculation, actions }) => (
                         }
                       </td>
                       <td className="amount">
-                        {people.byId[peopleId].total >= 0
+                        {people.byId[peopleId].total > 0
                           ? people.byId[peopleId].total
                           : '-'
                         }

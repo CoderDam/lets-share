@@ -12,12 +12,14 @@ const People = ({ people, sharing, actions }) => (
   <li id={`people-${people.id}`} className="people">
     {sharing
       ?
-        <span
-          className={classNames('people-name',
-          { 'people-name--done': people.done === 'ok' })}
-        >
-          {people.input}
-        </span>
+        <p>
+          <span
+            className={classNames('people-name',
+            { 'people-name--done': people.done === 'ok' })}
+          >
+            {people.input}
+          </span>
+        </p>
       :
         <div>
           <input

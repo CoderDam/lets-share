@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 /* Local import */
 import Thing from 'src/components/Core/Thing';
-import { updateThingInput, deleteThing, addThing, addPeople } from 'src/store/reducer';
+import { updateThingInput, deleteThing, addThing } from 'src/store/reducer';
 
 
 /* Map */
@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch, { id }) => ({
     delete: () => dispatch(deleteThing(id)),
     addThing: (string) => {
       if (string) dispatch(addThing());
-      else dispatch(addPeople());
+      else document.getElementById('core-share-go').focus();
     },
   },
 });

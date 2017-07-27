@@ -4,23 +4,31 @@
 // IDs
 #app
   &-footer
-    font-size: .9em
-    font-style: italic
     margin-top: 5em
     text-align: center
-    position: relative
 
-    #reboot
-      background-color: thistle
-      border-color: thistle
-      top: -3.5em
-      position: absolute
-      right: 0
+    &-buttons
+      width: 100%
+      display: flex
+      justify-content: flex-end
 
-      &:hover
-      &:focus
-        border-bottom-color: darkorchid
+      & .button
+        margin-left: 1em
+        background-color: thistle
+        border-color: thistle
 
+        &:hover
+        &:focus
+          border-bottom-color: darkorchid
+
+    & hr
+      margin-top: 3em
+
+    &-text
+      display: flex
+      font-size: .9em
+      font-style: italic
+      justify-content: space-around
 
 // Classes
 

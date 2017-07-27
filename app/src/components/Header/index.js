@@ -21,7 +21,7 @@ const Header = ({ display, actions }) => (
       { 'how-text--visible': display })}
     >
       <p className="text">
-        <em className="english">Easy buddy!</em> D'un côté on saisit les trucs à se partager, de l'autre les <em className="english">buddies</em>.
+        <em className="english">Easy buddy!</em> D'un côté on saisit les <em className="english">buddies</em>, de l'autre, les trucs à se partager.
       </p>
       <p className="text">
         Chaque <em className="english">buddy</em> indique alors le montant <strong>maximum</strong> qu'il est prêt à dépenser pour obtenir chaque truc. (oui oui, on parle de sous-sous !)
