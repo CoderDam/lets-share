@@ -11,7 +11,12 @@ import Footer from 'src/containers/Footer';
 /* Code */
 const App = () => (
   <main id="app">
-    <h1 id="app-title">Les bons comptes font les bons amis !</h1>
+    <h1 id="app-title">
+      <em>Let's share!</em>
+      <span id="app-title--sub">
+        <span>Les bons comptes font</span> <span>les bons amis !</span>
+      </span>
+    </h1>
 
     <Header />
     <Core />
