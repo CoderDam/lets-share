@@ -8,7 +8,7 @@ Thumbs.db
 node_modules/
 
 # Public Folder
-public/
+
 
 # log error
 npm-debug.log
