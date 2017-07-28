@@ -29,14 +29,19 @@
       transition: .5s
 
       &--visible
-        height: 10em
+        height: 15em
 
 
 /*****************************
  *          DESKTOP          *
  *****************************/
-@media (orientation: landscape)
+@media (min-width: 768px)
   // IDs
 
 
   // Classes
+  #app
+    & .how
+      &-text
+        &--visible
+          height: 10em

@@ -90,7 +90,7 @@ const reducer = (state = initialState, action = {}) => {
               ...state.things.byId,
               [currId]: {
                 id: currId,
-                input: '',
+                input: action.name ? action.name : '',
               },
             },
           },
@@ -372,8 +372,9 @@ export const showHow = () => ({
   type: HOW_DISPLAY,
 });
 
-export const addThing = () => ({
+export const addThing = name => ({
   type: THING_ADD,
+  name,
 });
 
 export const deleteThing = id => ({

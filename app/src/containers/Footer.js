@@ -11,12 +11,13 @@ import { addThing, addPeople, fullReboot } from 'src/store/reducer';
 // state
 const mapStateToProps = state => ({
   people: state.people,
+  things: state.things,
 });
 
 // dispatch
 const mapDispatchToProps = dispatch => ({
   actions: {
-    addThing: () => dispatch(addThing()),
+    addThing: name => dispatch(addThing(name)),
     addPeople: name => dispatch(addPeople(name)),
     fullReboot: () => dispatch(fullReboot()),
   },
@@ -33,6 +34,18 @@ const mergeProps = (stateProps, dispatchProps) => ({
       dispatchProps.actions.fullReboot();
       names.forEach(name => dispatchProps.actions.addPeople(name));
       dispatchProps.actions.addThing();
+    },
+    doItAgain: () => {
+      const buddys = stateProps.people.allIds.map(id => (
+        stateProps.people.byId[id].input
+      ));
+      const stuffs = stateProps.things.allIds.map(id => (
+        stateProps.things.byId[id].input
+      ));
+      dispatchProps.actions.fullReboot();
+      buddys.forEach(name => dispatchProps.actions.addPeople(name));
+      stuffs.forEach(name => dispatchProps.actions.addThing(name));
+      setTimeout(() => document.getElementById('core-share-go').focus(), 50);
     },
   },
 });

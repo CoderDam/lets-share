@@ -24,9 +24,16 @@ const Header = ({ display, actions }) => (
         <em className="english">Easy buddy!</em> D'un côté on saisit les <em className="english">buddies</em>, de l'autre, les trucs à se partager.
       </p>
       <p className="text">
-        Chaque <em className="english">buddy</em> indique alors le montant <strong>maximum</strong> qu'il est prêt à dépenser pour obtenir chaque truc. (oui oui, on parle de sous-sous !)
+        Chaque <em className="english">buddy</em> indique alors le montant <strong>maximum</strong> qu'il est prêt à dépenser pour obtenir chaque truc. (en effet, on parle d'argent)
       </p>
-      <p className="text">Et je m'occupe du reste <span role="img" aria-label="victory sign">✌</span></p>
+      <p className="text">
+        Et je m'occupe du reste&nbsp;
+        <span role="img" aria-label="victory sign">✌</span> (sur&nbsp;
+        <a
+          href="https://www.youtube.com/watch?v=kefptSDi0Es&t=7m53s"
+          title="vidéo : le partage socialement juste"
+        >ce principe</a>)
+      </p>
       <hr />
     </div>
   </header>

@@ -18,6 +18,12 @@ const Header = ({ actions }) => (
       >Nouveau partage avec les mêmes buddys</button>
 
       <button
+        id="things-reboot"
+        className="button"
+        onClick={actions.doItAgain}
+      >Refaire le partage</button>
+
+      <button
         id="full-reboot"
         className="button"
         tabIndex={-1}
@@ -28,9 +34,20 @@ const Header = ({ actions }) => (
     <hr />
 
     <p id="app-footer-text">
-      <span>Appli inspirée par <a href="https://www.youtube.com/watch?v=kefptSDi0Es&feature=youtu.be&t=7m53s">Science4All</a></span>
-      <span>réalisée par Damien GARNÈS</span>
-      <a href="mailto:garnes.damien|AT|gmail.com">Me contacter</a>
+      <span>
+        Inspiré par&nbsp;
+        <a
+          href="https://www.youtube.com/watch?v=kefptSDi0Es"
+          title="vidéo originale"
+        >Science4All</a>
+      </span>
+      <span>
+        Réalisé par&nbsp;
+        <a
+          href="mailto:garnes.damien|AT|gmail.com"
+          title="contact"
+        >Damien GARNÈS</a>
+      </span>
     </p>
   </footer>
 );
